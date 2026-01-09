@@ -253,12 +253,12 @@ class ReprintWindow(customtkinter.CTkToplevel):
         title_label = customtkinter.CTkLabel(main_frame, text=title_text, font=customtkinter.CTkFont(size=14, weight="bold"))
         title_label.grid(row=0, column=0, padx=20, pady=(15, 10))
 
-        start_label = customtkinter.CTkLabel(main_frame, text="From Backtrack ที่ต้องการพิมพ์ซ้ำ:")
+        start_label = customtkinter.CTkLabel(main_frame, text="From BlankTag ที่ต้องการพิมพ์ซ้ำ:")
         start_label.grid(row=1, column=0, padx=20, pady=(10, 0), sticky="w")
         self.start_entry = customtkinter.CTkEntry(main_frame, placeholder_text=f"เช่น {1:0{self.digits}d}")
         self.start_entry.grid(row=2, column=0, padx=20, pady=5, sticky="ew")
 
-        end_label = customtkinter.CTkLabel(main_frame, text="To Backtrack (ถ้าต้องการพิมพ์แค่ใบเดียวให้เว้นว่าง):")
+        end_label = customtkinter.CTkLabel(main_frame, text="To BlankTag (ถ้าต้องการพิมพ์แค่ใบเดียวให้เว้นว่าง):")
         end_label.grid(row=3, column=0, padx=20, pady=(10, 0), sticky="w")
         self.end_entry = customtkinter.CTkEntry(main_frame, placeholder_text=f"เช่น {2:0{self.digits}d}")
         self.end_entry.grid(row=4, column=0, padx=20, pady=5, sticky="ew")
@@ -335,7 +335,7 @@ class ReprintWindow(customtkinter.CTkToplevel):
 class App(customtkinter.CTk):
     def __init__(self):
         super().__init__()
-        self.title("โปรแกรมสร้าง Backtrack")
+        self.title("โปรแกรมสร้าง BlankTag")
         self.iconbitmap(resource_path("logo1.ico")) 
         self.geometry("563x380")
         self.grid_columnconfigure(0, weight=1)
@@ -358,7 +358,7 @@ class App(customtkinter.CTk):
         main_frame.grid(row=1, column=0, columnspan=2, padx=20, pady=10, sticky="ew")
         main_frame.grid_columnconfigure(0, weight=1)
         
-        quantity_label = customtkinter.CTkLabel(main_frame, text="จำนวน BackTrack ที่ต้องการสร้าง (รันต่อจากเลขล่าสุด)")
+        quantity_label = customtkinter.CTkLabel(main_frame, text="จำนวน BlankTag ที่ต้องการสร้าง (รันต่อจากเลขล่าสุด)")
         quantity_label.grid(row=2, column=0, padx=20, pady=(10, 0), sticky="w")
         
         self.quantity_entry = customtkinter.CTkEntry(main_frame, placeholder_text="เช่น 50", corner_radius=8)
@@ -369,7 +369,7 @@ class App(customtkinter.CTk):
         bottom_frame.grid_columnconfigure(0, weight=1)
         bottom_frame.grid_rowconfigure(1, weight=1)
         
-        self.generate_button = customtkinter.CTkButton(bottom_frame, text="พิมพ์ BackTrack", command=self.start_generation, corner_radius=8, font=customtkinter.CTkFont(size=14, weight="bold"))
+        self.generate_button = customtkinter.CTkButton(bottom_frame, text="พิมพ์ BlankTag", command=self.start_generation, corner_radius=8, font=customtkinter.CTkFont(size=14, weight="bold"))
         self.generate_button.grid(row=0, column=0, padx=20, pady=15)
         
         self.status_label = customtkinter.CTkLabel(bottom_frame, text="กรอกข้อมูลแล้วกดปุ่ม", wraplength=400)
@@ -426,7 +426,7 @@ class App(customtkinter.CTk):
         if self.last_number == 0: 
             self.last_num_label.configure(text=f"ยังไม่มีการบันทึก (จะเริ่มที่ {prefix}{next_num_str})")
         else: 
-            self.last_num_label.configure(text=f"Backtrack ล่าสุด: {prefix}{last_num_str} (Backtrack ต่อไปเริ่มที่ {prefix}{next_num_str})")
+            self.last_num_label.configure(text=f"BlankTag ล่าสุด: {prefix}{last_num_str} (BlankTag ต่อไปเริ่มที่ {prefix}{next_num_str})")
 
     def load_last_number(self):
         try:
