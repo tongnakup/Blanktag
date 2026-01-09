@@ -324,13 +324,10 @@ class ReprintWindow(customtkinter.CTkToplevel):
 
         self.generate_button.configure(state="disabled")
         
-        # ป้องกันชื่อไฟล์พังด้วยการแปลงอักขระพิเศษ
         safe_prefix = re.sub(r'[\\/*?:"<>|]', "_", prefix) 
 
-        # สร้างชื่อไฟล์
         filename = f"Reprint_{safe_prefix}{start_num:0{self.digits}d}-{safe_prefix}{end_num:0{self.digits}d}.pdf"
         
-        # เริ่ม Thread
         thread = threading.Thread(target=create_label_pdf, args=(filename, start_num, end_num, prefix, self.digits, self.update_status_safe, self.generation_completed_safe))
         thread.start()
 
@@ -453,10 +450,13 @@ class App(customtkinter.CTk):
             self.save_last_number(last_num_generated)
         self.generate_button.configure(state="normal")
 
-    def update_status(self, message, color):
+    def _internal_update_status(self, message, color):
         color_map = {"green": "#2ECC71", "red": "#E74C3C", "#EBA403": "#EBA403"}
         text_color = color_map.get(color, customtkinter.ThemeManager.theme["CTkLabel"]["text_color"])
         self.status_label.configure(text=message, text_color=text_color)
+
+    def update_status(self, message, color):
+        self.after(0, lambda: self._internal_update_status(message, color))
 
     def start_generation(self):
         prefix = self.config.get("prefix", "")
